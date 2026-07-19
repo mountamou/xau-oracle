@@ -1,0 +1,97 @@
+node_modules/
+android/
+.DS_Store
+
+{
+  "name": "xau-oracle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "XAU Oracle — analyste institutionnel XAUUSD, packagé en app Android via Capacitor.",
+  "scripts": {
+    "android:add": "cap add android",
+    "android:sync": "cap sync android",
+    "android:open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/android": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}
+
+{
+  "appId": "com.xauoracle.app",
+  "appName": "XAU Oracle",
+  "webDir": "www",
+  "backgroundColor": "#0A0A0B",
+  "android": {
+    "allowMixedContent": false
+  }
+}
+
+# XAU Oracle — générer et installer l'APK Android
+
+Ce projet contient une web app autonome (dossier `www/`) + un projet Capacitor qui
+l'enveloppe en app Android. La compilation se fait **dans le cloud via GitHub Actions**,
+gratuitement, sans installer Android Studio.
+
+## 1. Créer un dépôt GitHub
+
+1. Va sur https://github.com/new, crée un dépôt (public ou privé, peu importe), par ex. `xau-oracle`.
+2. Sur ton ordinateur, dans le dossier de ce projet :
+   ```bash
+   git init
+   git add .
+   git commit -m "XAU Oracle"
+   git branch -M main
+   git remote add origin https://github.com/TON-PSEUDO/xau-oracle.git
+   git push -u origin main
+   ```
+   (Pas besoin de Git en ligne de commande : tu peux aussi glisser-déposer tous les
+   fichiers du dossier directement sur la page du dépôt GitHub, via "Add file → Upload files".)
+
+## 2. Lancer la compilation
+
+1. Sur la page GitHub du dépôt, va dans l'onglet **Actions**.
+2. Le workflow "Build Android APK" se lance automatiquement après le push. Sinon,
+   clique dessus puis **Run workflow**.
+3. Attends 2-4 minutes que le build passe au vert ✅.
+
+## 3. Récupérer l'APK
+
+1. Toujours dans **Actions**, clique sur le run terminé.
+2. En bas de la page, section **Artifacts** → télécharge `xau-oracle-debug-apk` (fichier .zip).
+3. Dézippe : tu obtiens `app-debug.apk`.
+
+## 4. Installer sur ton téléphone Android
+
+1. Transfère `app-debug.apk` sur ton téléphone (câble, Google Drive, WhatsApp à toi-même, etc.).
+2. Ouvre le fichier depuis ton téléphone. Android va demander d'autoriser
+   "Installer des apps inconnues" pour l'app que tu utilises (Fichiers, Chrome…) —
+   accepte, c'est normal pour un APK qui ne vient pas du Play Store.
+3. Installe. L'icône **XAU Oracle** apparaît sur ton écran d'accueil.
+
+## 5. Première ouverture
+
+1. Va dans l'onglet **Plus** de l'app.
+2. Colle ta propre clé API Anthropic (créée sur https://console.anthropic.com) dans
+   le champ "Clé API Anthropic", puis **Enregistrer la clé**.
+3. Elle reste stockée uniquement sur ton téléphone. L'usage de l'API est facturé sur
+   ton compte Anthropic — pas de coût côté Anthropic Claude.ai.
+
+## Mettre à jour l'app plus tard
+
+Modifie les fichiers dans `www/`, refais un `git push`, GitHub Actions recompile
+automatiquement un nouvel APK à télécharger.
+
+## Notes
+
+- Ceci produit un **APK de debug**, installable directement sur ton téléphone.
+  Pour publier sur le Play Store, il faudrait en plus générer un **APK/AAB signé
+  en mode release** (clé de signature à créer et à garder précieusement) — dis-le
+  moi si tu veux cette étape en plus.
+- Cette app n'est pas un conseil financier. Les analyses générées dépendent
+  entièrement de la capture d'écran fournie ; elles ne remplacent pas ton propre
+  jugement ni une gestion du risque rigoureuse.
